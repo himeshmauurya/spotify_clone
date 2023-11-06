@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "117185032024",
+    "project_id": "spotifyapp-f91bf",
+    "storage_bucket": "spotifyapp-f91bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117185032024:android:a2082b85872cfeacff3f2d",
+        "android_client_info": {
+          "package_name": "com.spotifyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "117185032024-eqfk7fd6ammkommgsrfg6iphrdc9q18j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spotifyapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "117185032024-7vcvtrfumij86tp524qmh9ossedbf6vf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpGOvYQHc9jqmyjq6oIvtACkGGJqq66mM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "117185032024-7vcvtrfumij86tp524qmh9ossedbf6vf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
