@@ -26,13 +26,13 @@ const Bottomnav = () => {
               <View style={{borderTopColor: 'white', borderTopWidth: 2}}>
                 <Image
                   source={require('../../images/home.png')}
-                  style={{height: 25, width: 25, objectFit: 'contain'}}
+                  style={{height: 21, width: 23, objectFit: 'contain',marginBottom:0}}
                 />
               </View>
             ) : (
               <Image
                 source={require('../../images/home.png')}
-                style={{height: 25, width: 25, objectFit: 'contain'}}
+                style={{height: 21, width: 23, objectFit: 'contain',marginBottom:0}}
               />
             ),
         }}
@@ -49,13 +49,13 @@ const Bottomnav = () => {
               <View style={{borderTopColor: 'white', borderTopWidth: 2}}>
                 <Image
                   source={require('../../images/playlist.png')}
-                  style={{height: 25, width: 25, objectFit: 'contain'}}
+                  style={{height: 21, width: 23, objectFit: 'contain',marginBottom:0}}
                 />
               </View>
             ) : (
               <Image
                 source={require('../../images/playlist.png')}
-                style={{height: 25, width: 35, objectFit: 'contain'}}
+                style={{height: 21, width: 23, objectFit: 'contain',marginBottom:0}}
               />
             ),
         }}
@@ -72,13 +72,13 @@ const Bottomnav = () => {
               <View style={{borderTopColor: 'white', borderTopWidth: 2}}>
                 <Image
                   source={require('../../images/favbot.png')}
-                  style={{height: 25, width: 25, objectFit: 'contain'}}
+                  style={{height: 21, width: 23, objectFit: 'contain',marginBottom:0}}
                 />
               </View>
             ) : (
               <Image
                 source={require('../../images/favbot.png')}
-                style={{height: 25, width: 25, objectFit: 'contain'}}
+                style={{height: 21, width: 23, objectFit: 'contain',marginBottom:0}}
               />
             ),
         }}

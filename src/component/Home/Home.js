@@ -20,7 +20,8 @@ import {styles} from './homeStyle';
 
 const Home = () => {
   const navigation = useNavigation();
-  const {curr, setcurr, recent, setrecent} = useContext(MyContext);
+  const {curr, setcurr, recent, setrecent,profiledata} = useContext(MyContext);
+ const p=profiledata.photo;
   function res() {
     googlesignOut();
     navigation.navigate('Signup');
@@ -30,10 +31,14 @@ const Home = () => {
       {/* header */}
       <View
         style={styles.viewprofile}>
-        <Image
-          source={require('../../images/profile.png')}
+          <TouchableOpacity onPress={()=>{
+          navigation.navigate('Profile')
+          }}><Image
+          // source={require('../../images/profile.png')}
+          source={{uri:p}}
           style={styles.imgprofile}
-        />
+        /></TouchableOpacity>
+        
         <TouchableOpacity onPress={res}>
           <Text style={styles.signout}>Signout</Text>
         </TouchableOpacity>

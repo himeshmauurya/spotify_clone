@@ -15,6 +15,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Slider from '@react-native-community/slider';
 // import {songsList2} from '../../../SongsList';
 import { songsList2 } from '../config/SongList';
+import SystemSetting from 'react-native-system-setting'
 import TrackPlayer, {
   Capability,
   State,
@@ -33,6 +34,30 @@ const Playlist = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [search, setSearch] = useState('');
   const [data, setdata] = useState(songsList2);
+  const [volume, setVolumephone] = useState(0);
+  SystemSetting.addVolumeListener((data) => {  
+     setVolumephone(data.value)
+   });
+   useEffect(()=>{
+      SystemSetting.getVolume().then((volume)=>{
+        setVolumephone(volume)
+        SystemSetting.setVolume(volume);
+      });
+   },[])
+   function deccvolume(){
+     SystemSetting.getVolume().then((volume)=>{
+       console.log('Current volume is ' + volume);
+       SystemSetting.setVolume(Math.max(0, volume - 0.1));
+    
+     });
+   }
+   function inccvolume(){
+     SystemSetting.getVolume().then((volume)=>{
+       console.log('Current volume is ' + volume);
+       SystemSetting.setVolume(Math.min(1, volume + 0.1));
+   
+     });
+   }
 
   useEffect(() => {
     console.log('curr787', curr);
@@ -61,11 +86,15 @@ const Playlist = () => {
   //     setIsVisible(false)
   //   }
   // }, [fav]);
-  const [volume, setVolume] = useState(1);
-  const changeVolume = newVolume => {
-    setVolume(newVolume);
-    TrackPlayer.setVolume(newVolume);
-  };
+ 
+  // function changeVolume(newVolume){
+  //   setVolumephone(newVolume)
+  //   SystemSetting.getVolume().then((volume)=>{
+  //     console.log('Current volume is ' + newVolume);
+  //     SystemSetting.setVolume(newVolume);
+  //     //console.log('Current volume is ' + volume);
+  //   });
+  // }
   // useEffect(async()=>{
   //   await TrackPlayer.reset();
   // },[])
@@ -291,7 +320,7 @@ const Playlist = () => {
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <TouchableOpacity
-            onPress={() => changeVolume(Math.min(1, volume + 0.1))}>
+            onPress={inccvolume}>
             <Image
               source={require('../../images/inc.png')}
               style={{
@@ -303,7 +332,7 @@ const Playlist = () => {
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => changeVolume(Math.max(0, volume - 0.1))}>
+            onPress={deccvolume}>
             <Image
               source={require('../../images/dec.png')}
               style={{
@@ -502,7 +531,10 @@ const Playlist = () => {
         }}
       />
       <View>
-        <View
+        <TouchableOpacity
+        onPress={async()=>{
+          navigation.navigate('Onplay', {currItem: data[currentIndex]});
+        }}
           activeOpacity={1}
           style={{
             width: '100%',
@@ -619,7 +651,7 @@ const Playlist = () => {
             value={progress.position}
             thumbTintColor="transparent"
           />
-        </View>
+        </TouchableOpacity>
       </View>
       
     </LinearGradient>

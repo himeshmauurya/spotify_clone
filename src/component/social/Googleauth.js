@@ -26,7 +26,7 @@ import auth from '@react-native-firebase/auth';
       //  console.log(userInfo.user)
       const {idToken} = await GoogleSignin.signIn();
       const googleCredentials = auth.GoogleAuthProvider.credential(idToken);
-      console.log(googleCredentials)
+      //console.log(userInfo.user)
       auth().signInWithCredential(googleCredentials);
       return userInfo;
       

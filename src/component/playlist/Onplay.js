@@ -26,40 +26,40 @@ import {
   StyleSheet,
 } from 'react-native';
 
-const CurrSong = () => {
+const Onplay = () => {
   const {curr, setcurr, recent, setrecent} = useContext(MyContext);
 
   const navigation = useNavigation();
   const route = useRoute();
   const {currItem} = route.params;
   const playbackState = usePlaybackState();
-  const progress = useProgress(currItem.duration);
+  const progress = useProgress(2);
   const [play, setPlay] = useState(false);
   const [volume, setVolumephone] = useState(0);
- SystemSetting.addVolumeListener((data) => {  
-    setVolumephone(data.value)
-  });
-  useEffect(()=>{
+  SystemSetting.addVolumeListener((data) => {  
+     setVolumephone(data.value)
+   });
+   useEffect(()=>{
+      SystemSetting.getVolume().then((volume)=>{
+        setVolumephone(volume)
+        SystemSetting.setVolume(volume);
+      });
+   },[])
+   function deccvolume(){
      SystemSetting.getVolume().then((volume)=>{
-       setVolumephone(volume)
-       SystemSetting.setVolume(volume);
+       console.log('Current volume is ' + volume);
+       SystemSetting.setVolume(Math.max(0, volume - 0.1));
+    
      });
-  },[])
-  function deccvolume(){
-    SystemSetting.getVolume().then((volume)=>{
-      console.log('Current volume is ' + volume);
-      SystemSetting.setVolume(Math.max(0, volume - 0.1));
+   }
+   function inccvolume(){
+     SystemSetting.getVolume().then((volume)=>{
+       console.log('Current volume is ' + volume);
+       SystemSetting.setVolume(Math.min(1, volume + 0.1));
    
-    });
-  }
-  function inccvolume(){
-    SystemSetting.getVolume().then((volume)=>{
-      console.log('Current volume is ' + volume);
-      SystemSetting.setVolume(Math.min(1, volume + 0.1));
-  
-    });
-  }
-  
+     });
+   }
+  //console.log(currItem);
   useEffect(() => {
     async function setup() {
       const idToRemove = currItem.id;
@@ -78,10 +78,10 @@ const CurrSong = () => {
       }
 
       let isSetup = await setupPlayer();
-      await TrackPlayer.reset();
-      await TrackPlayer.add([currItem]);
-      await TrackPlayer.play();
-      setPlay(isSetup);
+      //await TrackPlayer.reset();
+     // await TrackPlayer.add([currItem]);
+     // await TrackPlayer.play();
+       setPlay(isSetup);
     }
     setup();
   }, [currItem]);
@@ -115,8 +115,8 @@ const CurrSong = () => {
           style={{marginBottom: 50, marginLeft: 20, marginTop: 30}}
           onPress={async() => {
             navigation.goBack();
-            await TrackPlayer.reset();
-            await TrackPlayer.add(songsList2);
+            //await TrackPlayer.reset();
+            //await TrackPlayer.add(songsList2);
             
           }}>
           <Image
@@ -309,4 +309,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CurrSong;
+export default Onplay;

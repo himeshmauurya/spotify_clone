@@ -14,8 +14,11 @@ export const styles = StyleSheet.create({
       justifyContent: 'space-between',
       padding: 10,
       alignItems: 'center',
+    
+      //marginTop:40,
+    //  borderRadius:50
     },imgprofile:{
-      width: 40, height: 40
+      width: 40, height: 40, borderRadius:50
     },signout:{
       color: 'white', fontSize: 16
     },textrecent:{

@@ -1,16 +1,19 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import React, {useState, useContext, useEffect} from 'react';
 import {Button, Text, View, TouchableOpacity} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {styles} from './DobStyle';
-
+import { MyContext } from '../../context/MyProvider';
 const Dob = () => {
+  const {profiledata,setdob} = useContext(MyContext);
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const navigation = useNavigation();
+  
   const handleConfirm = selectedDate => {
     setOpen(false);
     setDate(selectedDate);
+    setdob(selectedDate)
   };
 
   return (
