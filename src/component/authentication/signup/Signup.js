@@ -1,5 +1,5 @@
 
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, Alert} from 'react-native';
 import React, {createContext, useState,useContext} from 'react';
 import IMAGES from '../../../Assets';
 import {useNavigation} from '@react-navigation/native';
@@ -35,9 +35,8 @@ const Signup = () => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={async () => {
-         const p= await googlesignIn();
-         //console.log("object,p",p.user)
-         setprofiledata(p.user)
+         const p=await googlesignIn();
+          setprofiledata(p.user)
           navigation.navigate('Dob');
           console.log('Sign up for Google');
         }}

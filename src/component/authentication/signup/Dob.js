@@ -19,10 +19,12 @@ const Dob = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.textdob}>What's your Date of Birth</Text>
-
-      <Text onPress={() => setOpen(true)} style={styles.seldate}>
+     <TouchableOpacity onPress={() => setOpen(true)}>
+     <Text style={styles.seldate}>
         Select Date
       </Text>
+     </TouchableOpacity>
+     
       <DatePicker
         modal
         open={open}

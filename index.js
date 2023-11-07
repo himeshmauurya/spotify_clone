@@ -8,3 +8,4 @@ import {name as appName} from './app.json';
 import TrackPlayer from 'react-native-track-player';
 AppRegistry.registerComponent(appName, () => App);
 TrackPlayer.registerPlaybackService(() => require('./src/component/config/Service'));
+console.ignoredYellowBox=true;
