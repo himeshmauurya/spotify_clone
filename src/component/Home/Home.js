@@ -9,7 +9,7 @@ import {
 import React, {useState, useContext, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 // import {songsList2} from '../../../SongsList';
-import { songsList2 } from '../config/SongList';
+import {songsList2} from '../config/SongList';
 import {MyContext} from '../context/MyProvider';
 import TrackPlayer, {
   usePlaybackState,
@@ -20,35 +20,51 @@ import {styles} from './homeStyle';
 
 const Home = () => {
   const navigation = useNavigation();
-  const {curr, setcurr, recent, setrecent,profiledata} = useContext(MyContext);
- const p=profiledata.photo;
+  const {curr, setcurr, recent, setrecent, profiledata,setprofiledata} = useContext(MyContext);
   function res() {
+    if(profiledata==undefined){
+      return;
+    }
     googlesignOut();
     navigation.navigate('Signup');
+    setprofiledata()
   }
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {/* header */}
-      <View
-        style={styles.viewprofile}>
-          <TouchableOpacity onPress={()=>{
-          navigation.navigate('Profile')
-          }}><Image
-          // source={require('../../images/profile.png')}
-          source={{uri:p}}
-          style={styles.imgprofile}
-        /></TouchableOpacity>
-        
-        <TouchableOpacity onPress={res}>
-          <Text style={styles.signout}>Signout</Text>
+      <View style={styles.viewprofile}>
+        {profiledata==undefined ? (
+          <TouchableOpacity
+            onPress={() => {
+             console.log("unknown user")
+            }}>
+            <Image
+               source={require('../../images/profile.png')}
+              style={styles.imgprofile}
+            />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Profile');
+            }}>
+            <Image
+              source={{uri: profiledata.photo}}
+              style={styles.imgprofile}
+            />
+          </TouchableOpacity>
+          
+        )}
+       <TouchableOpacity onPress={res}>
+        {profiledata==undefined?null:<Text style={styles.signout}>Signout</Text>}
+          
         </TouchableOpacity>
+        
       </View>
       {/* recently played */}
       <View style={{}}>
         {recent.length > 0 ? (
-          <Text style={styles.textrecent}>
-            Recntly played Songs
-          </Text>
+          <Text style={styles.textrecent}>Recently played Songs</Text>
         ) : null}
         <View>
           {/* {!allrecentdata? */}
@@ -60,32 +76,20 @@ const Home = () => {
               <TouchableOpacity
                 style={{margin: 8}}
                 onPress={() => {
-                  //console.log(index)
                   setcurr(item);
-                  //console.log('home', item);
                   navigation.navigate('CurrSong', {currItem: item});
                 }}>
-                <Image
-                  source={{uri: item.artwork}}
-                  style={styles.imgcurr}
-                />
-                <Text style={styles.title}>
-                  Title : {item.title}
-                </Text>
-                <Text style={styles.artist}>
-                  Artist : {item.artist}
-                </Text>
+                <Image source={{uri: item.artwork}} style={styles.imgcurr} />
+                <Text style={styles.title}>Title : {item.title}</Text>
+                <Text style={styles.artist}>Artist : {item.artist}</Text>
               </TouchableOpacity>
             )}
           />
-        
         </View>
       </View>
       {/* Hindi */}
       <View style={{marginTop: 20}}>
-        <Text style={styles.hindi}>
-          Hindi Songs
-        </Text>
+        <Text style={styles.hindi}>English Songs</Text>
         <View>
           {/* {!alldata? */}
           <FlatList
@@ -101,90 +105,66 @@ const Home = () => {
                   //console.log('home', item);
                   navigation.navigate('CurrSong', {currItem: item});
                 }}>
-                <Image
-                  source={{uri: item.artwork}}
-                  style={styles.imgcurr}
-                />
-                <Text style={styles.title}>
-                  Title : {item.title}
-                </Text>
-                <Text style={styles.artist}>
-                  Artist : {item.artist}
-                </Text>
+                <Image source={{uri: item.artwork}} style={styles.imgcurr} />
+                <Text style={styles.title}>Title : {item.title}</Text>
+                <Text style={styles.artist}>Artist : {item.artist}</Text>
               </TouchableOpacity>
             )}
           />
-          
         </View>
       </View>
       {/* Punjabi */}
       <View style={{marginTop: 20}}>
-        <Text style={styles.hindi}>
-          Punjabi Songs
-        </Text>
+        <Text style={styles.hindi}>Punjabi Songs</Text>
         <View>
           {/* {!alldata? */}
           <FlatList
             data={songsList2}
             horizontal={true}
             keyExtractor={item => item.id}
-            renderItem={({item}) => (
+            renderItem={({item, index}) => (
               <TouchableOpacity
                 style={{margin: 8}}
                 onPress={() => {
+                  //console.log(index)
+                  setcurr(item);
+                  //console.log('home', item);
                   navigation.navigate('CurrSong', {currItem: item});
                 }}>
-                <Image
-                  source={{uri: item.artwork}}
-                  style={styles.imgcurr}
-                />
-                <Text style={styles.title}>
-                  Title : {item.title}
-                </Text>
-                <Text style={styles.artist}>
-                  Artist : {item.artist}
-                </Text>
+                <Image source={{uri: item.artwork}} style={styles.imgcurr} />
+                <Text style={styles.title}>Title : {item.title}</Text>
+                <Text style={styles.artist}>Artist : {item.artist}</Text>
               </TouchableOpacity>
             )}
           />
-          
         </View>
       </View>
       {/* English */}
       <View style={{marginTop: 20}}>
-        <Text style={styles.textrecent}>
-          English Songs
-        </Text>
+        <Text style={styles.hindi}>English Songs</Text>
         <View>
           {/* {!alldata? */}
           <FlatList
             data={songsList2}
             horizontal={true}
             keyExtractor={item => item.id}
-            renderItem={({item}) => (
+            renderItem={({item, index}) => (
               <TouchableOpacity
                 style={{margin: 8}}
                 onPress={() => {
+                  //console.log(index)
+                  setcurr(item);
+                  //console.log('home', item);
                   navigation.navigate('CurrSong', {currItem: item});
                 }}>
-                <Image
-                  source={{uri: item.artwork}}
-                  style={styles.imgcurr}
-                />
-                <Text style={styles.title}>
-                  Title : {item.title}
-                </Text>
-                <Text style={styles.artist}>
-                  Artist : {item.artist}
-                </Text>
+                <Image source={{uri: item.artwork}} style={styles.imgcurr} />
+                <Text style={styles.title}>Title : {item.title}</Text>
+                <Text style={styles.artist}>Artist : {item.artist}</Text>
               </TouchableOpacity>
             )}
           />
-          
         </View>
       </View>
-
-     
     </ScrollView>
   );
 };

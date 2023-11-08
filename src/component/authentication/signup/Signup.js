@@ -20,12 +20,14 @@ const Signup = () => {
       <Text style={styles.free}>Free on Spotify.</Text>
       <TouchableOpacity
         onPress={() => {
+          navigation.navigate('Dob');
           console.log('Sign up for free');
         }}
         style={styles.signupfree}>
         <Text style={styles.textsignupfree}>Sign up for free</Text>
       </TouchableOpacity>
       <TouchableOpacity
+      
         onPress={() => {
           console.log('Sign up for phone number');
         }}
@@ -34,6 +36,7 @@ const Signup = () => {
         <Text style={styles.textphone}>Continue with phone number</Text>
       </TouchableOpacity>
       <TouchableOpacity
+      
         onPress={async () => {
          const p=await googlesignIn();
           setprofiledata(p.user)
@@ -45,15 +48,15 @@ const Signup = () => {
         <Text style={styles.imggoogle}>Continue with Google</Text>
       </TouchableOpacity>
       <TouchableOpacity
+      disabled={true}
         onPress={() => {
-          googlesignOut();
           console.log('Sign up for Facebook');
         }}
         style={styles.pressfacebook}>
         <Image source={IMAGES.FACEBOOK} style={{height: 24, width: 24}} />
         <Text style={styles.textface}>Continue with Facebook</Text>
       </TouchableOpacity>
-      <Text style={styles.textface}>Log in</Text>
+      {/* <Text style={styles.textface}>Log in</Text> */}
     </View>
   );
 };
